@@ -1,5 +1,5 @@
 import React from 'react';
-import {storeProducts} from './data'
+import {storeProducts, detailedProducts} from './data'
 
 const ProductContext = React.createContext();
 
@@ -8,16 +8,30 @@ const ProductContext = React.createContext();
 //Consumer
  class ProductProvider extends React.Component{
 		state = {
-			products : storeProducts,
+			products :[],
+			detailedProducts: detailedProducts
 		};
+		componentDidMount(){
+			this.setProducts();
+		}
 
+		setProducts =()=>{
+			let tempProducts =[];
+			storeProducts.forEach(item =>{
+				const singleItem = {...item};
+				tempProducts = [...tempProducts,singleItem];
+			});
+		   this.setState(() =>{
+			return {products :tempProducts}
+		});
+};
 		handleDetail = () =>{
 				console.log('Hello from Details');
 			}
 
 			addToCart = () =>{
 				console.log('hello from Cart');
-			}
+			};
 
 		render(){
 
