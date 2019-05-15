@@ -13,16 +13,31 @@ export default class Product extends React.Component{
 		return(
 			<ProductWrapper className="col-9 mx-auto col-md-6 col-lg-3 my-3">
 			<div className = "card">
-			<div className="img-container p-5">
+			<ProductConsumer>
+			{
+				(value) =>(
+
+			<div className="img-container p-5" onClick ={() =>
+				value.handleDetail(id)
+			}>
 			<Link to = {"/Details"}>
 			<img src={img} alt="product" className="card-img-top">
 			</img>
 			</Link>
 
 			<button className="cart-btn">
-			<i class="fas fa-shopping-cart"></i>
+			<i class="fas fa-shopping-cart" onClick= {() =>{
+				
+				value.addToCart(id);
+
+			}}></i>
 			</button>
 			</div>
+			)}
+			
+			</ProductConsumer>
+
+
 		     {/* card footer */}
 		     <div className = "card-footer d-flex.justify-content-between">
 		     <p className = "align-self-center mb-0">

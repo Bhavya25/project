@@ -10,6 +10,8 @@ export default class Details extends React.Component{
 			{value =>{
 				const {id, title, img, price, booktype,author,info,count,total} = value.detailedProducts;
 				console.log(value.detailedProducts.title);
+				console.log(id);
+
 				return(
 					<div className = "container py-5">
 				    {/* title*/}
@@ -44,9 +46,8 @@ export default class Details extends React.Component{
 					<Link to = "/">
 					<ButtonContainer>back to products </ButtonContainer>
 					</Link>
-					<Link to = "/Cart">
-					<ButtonContainer>Add to Cart </ButtonContainer>
-					</Link>
+					<ButtonContainer cart onClick ={()=> {value.addToCart(id);}}>Add to Cart </ButtonContainer>
+					
 
 					</div>
 					</div>
