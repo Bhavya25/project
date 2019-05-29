@@ -47,7 +47,9 @@ const ProductContext = React.createContext();
 			const index = this.state.cart.indexOf(product);
 			product.count = product.count+1;
 			product.total = product.price*product.count;
-			this.state.cartTotal=this.state.cartTotal + product.price;
+			this.state.cartSubTotal=this.state.cartSubTotal + product.price;
+			this.state.cartTax = (this.state.cartSubTotal*10)/100;
+			this.state.cartTotal= this.state.cartSubTotal + this.state.cartTax;
 
 			this.setState(()=>{
 				return {cart : [...this.state.cart]}
@@ -59,14 +61,16 @@ const ProductContext = React.createContext();
 			const index = this.state.cart.indexOf(product);
 			product.count = product.count-1;
 			product.total = product.price*product.count;
-			this.state.cartTotal = this.state.cartTotal -product.price;
+			this.state.cartSubTotal = this.state.cartSubTotal -product.price;
+				this.state.cartTax = (this.state.cartSubTotal*10)/100;
+			this.state.cartTotal= this.state.cartSubTotal + this.state.cartTax;
 
 			if(product.count == 0){
 				this.removeItem(id);
 			}
 
 			this.setState(()=>{
-				return {cart : [...this.state.cart], cartTotal: this.state.cartTotal}
+				return {cart : [...this.state.cart], cartSubTotal: this.state.cartSubTotal}
 			})
 		}
 
@@ -75,22 +79,26 @@ const ProductContext = React.createContext();
 			const index = this.state.cart.indexOf(product);
 			const price = product.price;
 			const quantity = product.count;
-			this.state.cartTotal = this.state.cartTotal- (price*quantity);
+			this.state.cartSubTotal = this.state.cartSubTotal- (price*quantity);
+			this.state.cartTax = (this.state.cartSubTotal*10)/100;
+			this.state.cartTotal= this.state.cartSubTotal + this.state.cartTax;
 
 			if(index != -1){
 				this.state.cart.splice(index,1);
 				this.setState(() =>{
-					return {cart : [...this.state.cart], cartTotal: this.state.cartTotal}
+					return {cart : [...this.state.cart], cartSubTotal: this.state.cartSubTotal}
 				})
 			}
 		}
 
 		clearCart = () =>{
 			this.state.cart.splice(0,this.state.cart.length);
-			this.state.cartTotal = 0;
+			this.state.cartSubTotal = 0;
+				this.state.cartTax = 0;
+			this.state.cartTotal= 0;
 
 			this.setState(()=>{
-				return {cart:[...this.state.cart], cartTotal: this.state.cartTotal}
+				return {cart:[...this.state.cart], cartSubTotal: this.state.cartSubTotal}
 			})
 		}
 
@@ -104,12 +112,14 @@ const ProductContext = React.createContext();
 			  product.count = product.count+1;
 			  const price = product.price ;
 			  product.total =product.price*product.count;
-			  this.state.cartTotal = this.state.cartTotal+price;
+			  this.state.cartSubTotal = this.state.cartSubTotal+price;
+			  this.state.cartTax = (this.state.cartSubTotal*10)/100;
+			this.state.cartTotal= this.state.cartSubTotal + this.state.cartTax;
 
 			  if(product.inCart == false){
 			  	product.inCart = true;
 			  	this.setState(() =>{
-			  	return {products : tempProducts, cart: [...this.state.cart,product], cartTotal:this.state.cartTotal };
+			  	return {products : tempProducts, cart: [...this.state.cart,product], cartSubTotal:this.state.cartSubTotal };
 			  	},()=>{console.log(this.state);
 			  	
 			  });
@@ -123,7 +133,7 @@ const ProductContext = React.createContext();
                  
                   
                   this.setState(() =>{
-                  	return {products : tempProducts, cart :[...this.state.cart] , cartTotal:this.state.cartTotal};
+                  	return {products : tempProducts, cart :[...this.state.cart] , cartSubTotal:this.state.cartSubTotal};
                    },() =>{console.log(this.state);
                    });
               }

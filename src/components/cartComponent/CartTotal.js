@@ -16,6 +16,24 @@ export default function CartTotal({value}){
 		clear cart
 		</button>
 		</Link>
+		<h5>
+		<span className = "text-title">
+		subtotal : </span>
+		<strong>Rs:{cartSubTotal}</strong>
+		</h5>
+
+		<h5>
+		<span className = "text-title">
+		tax : </span>
+		<strong>Rs:{cartTax}</strong>
+		</h5>
+
+		<h5>
+		<span className = "text-title">
+		cartTotal : </span>
+		<strong>Rs:{cartTotal}</strong>
+		</h5>
+
 		</div>
 		</div>
 		</div>
