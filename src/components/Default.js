@@ -7,6 +7,6 @@ export default class Default extends React.Component{
 			<div>
 			<h3>Sorry, Page not found </h3>
 			</div>
-			)
+			);
 	}
 } 

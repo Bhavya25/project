@@ -17,21 +17,25 @@ export default class Product extends React.Component{
 			{
 				(value) =>(
 
-			<div className="img-container p-5" onClick ={() =>
+			<div className="img-container p-3" onClick ={() =>
 				value.handleDetail(id)
 			}>
 			<Link to = {"/Details"}>
-			<img src={img} alt="product" className="card-img-top">
+			<img src={img} alt="product" className="card-img-top" >
 			</img>
 			</Link>
 
+			<Link to ="/Cart">
 			<button className="cart-btn">
 			<i class="fas fa-shopping-cart" onClick= {() =>{
 				
 				value.addToCart(id);
+			
 
 			}}></i>
+
 			</button>
+			</Link>
 			</div>
 			)}
 			

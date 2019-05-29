@@ -46,8 +46,15 @@ export default class Details extends React.Component{
 					<Link to = "/">
 					<ButtonContainer>back to products </ButtonContainer>
 					</Link>
-					<ButtonContainer cart onClick ={()=> {value.addToCart(id);}}>Add to Cart </ButtonContainer>
+
 					
+					<Link to = "/Cart">
+					<ButtonContainer cart onClick ={()=> {
+						value.addToCart(id);
+					}
+					}>Add to Cart </ButtonContainer>
+					</Link>
+
 
 					</div>
 					</div>
